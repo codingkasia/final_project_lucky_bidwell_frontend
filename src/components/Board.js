@@ -1,53 +1,55 @@
 import React from 'react'
 import Square from './Square'
 import { API_ROOT } from "../constants";
+const award = 100;
+
 
 class Board extends React.Component {
-  // state = {
-  //   value: this.props.value,
-  //   room_id: this.props.room_id,
-  //   user_id: this.props.user_id,
-  //   color: this.props.color,
-  //   lucky: null,
-  //   found: false,
-  //   guesses: this.props.guesses
-  // };
-
+  
   state = {
-    points: null
+    points: 100
   }
   
-  componentDidMount() {
-    this.fetchPoints() 
-  }
-      
+  
+  
+  // componentWillMount() {
+  //   console.log("starting a game!")
+  //   // this.generateInitLucky()
+  //   // this.fetchPoints() 
+  // }
 
-  fetchPoints = () => {
-    fetch(`${API_ROOT}/points`)
-      .then(res => res.json())
-      .then(points => console.log(points.points))
-        // this.setState({ points: points.points }));
-  }; 
+  // //tem solution => will update based on json from points fetch
+  updateStatePoints = () => {
+    this.setState({ points: this.state.points + award})
+  }
+
+ 
+
+  // fetchPoints = () => {
+  //   fetch(`${API_ROOT}/points`)
+  //     .then(res => res.json())
+  //     .then(points => {
+  //       console.log(`POINTS, ${point.points}`)
+  //       this.setState({ points: points.points })
+  //     });
+  // }; 
 
   
   renderSquare(i) {
-    return (
-      <Square
-        points={this.state.points}
-        guesses={this.props.room.guesses}
-        value={i}
-        room_id={this.props.room.id}
-        user_id={this.props.activeUser}
-        fetchPoints={this.fetchPoints}
-      />
-    );
+     return <Square points={this.state.points} 
+                    guesses={this.props.room.guesses} 
+                    value={i} room_id={this.props.room.id} 
+                    user_id={this.props.activeUser} 
+                    initLucky={this.props.initLucky}
+                    updateStatePoints={this.updateStatePoints}
+                    />;
   }
 
   render() {
     // console.log(`USER is, ${this.props.activeUser}`)
     return <div>
      
-        <div >POINTS {this.state.points} </div>
+        <div >POINTS: {this.state.points} </div>
 
         <div className="board-row">
           {this.renderSquare(1)}

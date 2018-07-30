@@ -9,10 +9,29 @@ class RoomsList extends React.Component {
   state = {
     rooms: [],
     activeRoom: null,
-    activeUser: []
+    activeUser: [],
+    initLucky: 13
+  };
+  // fetchPoints = () => {
+  //   fetch(`${API_ROOT}/points`)
+  //     .then(res => res.json())
+  //     .then(points => {
+  //       console.log(`POINTS, ${points.points}`)
+  //       this.setState({ points: points.points })
+  //     });
+  // };
+  generateInitLucky = () => {
+    const num = Math.floor(Math.random() * 27) + 1;
+    console.log(`INIT RANDOM NUMBER, ${num}`);
+    return this.setState({ initLucky: num });
   };
 
-  
+  // will need to save somehow so both players start with the same lucky
+  // otherwise who clicks
+  // componentWillMount() {
+  //   this.generateInitLucky();
+  // }
+
   componentDidMount = () => {
     fetch(`${API_ROOT}/rooms`)
       .then(res => res.json())
@@ -93,7 +112,7 @@ class RoomsList extends React.Component {
           <Board
             room={findActiveRoom(rooms, activeRoom)}
             activeUser={this.state.activeUser}
-      
+            initLucky={this.state.initLucky}
           />
         ) : null}
       </div>
