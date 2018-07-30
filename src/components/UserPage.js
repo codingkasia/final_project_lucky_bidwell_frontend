@@ -3,7 +3,6 @@ import RoomsList from './RoomsList'
 
 const baseUrl = 'http://localhost:3001'
 
-
 class UserPage extends React.Component {
   state = {
       user: null
@@ -23,9 +22,6 @@ class UserPage extends React.Component {
         })
       
   }
-    
-    
-
     // componentWillMount() {
     //     let token = localStorage.getItem("token");
     //     fetch(`${secondBaseUrl}/user`, {

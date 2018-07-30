@@ -17,10 +17,14 @@ class Square extends React.Component {
     };
     this.evaluateClick = this.evaluateClick.bind(this);
   }
-  // //tem solution => will update based on json from points fetch
-  // updateStatePoints = () => {
-  //   this.setState({ points: this.props.points + award });
-  // };
+
+  updateLuckySquare = () => {
+    fetch(`${API_ROOT}/guesses/my_guess_id`, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify(this.state)
+    });
+  }
 
   generateNewLucky = () => {
     const lucky = Math.floor(Math.random() * 27) + 1;
@@ -39,7 +43,6 @@ class Square extends React.Component {
   evaluateClick() {
     this.props.guesses.map(guess => {
       //check if the guess is lucky
-
       if (
         this.state.value === this.state.lucky &&
         this.state.value !== guess.value
@@ -55,22 +58,33 @@ class Square extends React.Component {
         this.setState({ found: true });
         // 4. update points (for now keep track of points in state only)
         this.props.updateStatePoints();
+
       } else if (
         this.state.value === this.state.lucky &&
         this.state.value === guess.value
       ) {
         this.setState({ bgColor: "orange" });
+        if(guess.tem !== null) {
+          const guessID = guess.id 
+          console.log(`guessID, ${guessID}`);
+          fetch(`${API_ROOT}/guesses/${guessID}`, {
+            method: "PATCH",
+            headers: HEADERS,
+            body: JSON.stringify({bgColor: "orange"})
+          })
+          // .then(fetch(`${API_ROOT}/guesses`)
+          //   .then(res => res.json())
+          //   .then(guesses => console.log(guesses)));
+        }
         // check who holds lucky and change bgColor to orange
-        console.log(`TEMP = , ${this.state.temp}`);
+        console.log(`TEMP = , ${guess.temp}, USER, ${guess.user_id}`);
         console.log(guess.temp);
-        if (guess.temp !== null) {
-          guess.bgColor = "pink";
+      
+          // I want to update the guess with guess.temp != null to guess.bgColor = "orange";
           // this.setState({ temp: null })
           // generate a new lucky
-          this.generateNewLucky();
-        } else {
-          console.log("nothing yet");
-        }
+          // then generste a new lucky via this.generateNewLucky();
+       
       } else if (this.state.value !== this.state.lucky) {
         this.setState({ bgColor: "orange" });
         //if you find the lucky but it was already claimed by someone else:

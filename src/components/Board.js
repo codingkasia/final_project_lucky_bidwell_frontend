@@ -10,8 +10,6 @@ class Board extends React.Component {
     points: 100
   }
   
-  
-  
   // componentWillMount() {
   //   console.log("starting a game!")
   //   // this.generateInitLucky()
@@ -22,8 +20,6 @@ class Board extends React.Component {
   updateStatePoints = () => {
     this.setState({ points: this.state.points + award})
   }
-
- 
 
   // fetchPoints = () => {
   //   fetch(`${API_ROOT}/points`)

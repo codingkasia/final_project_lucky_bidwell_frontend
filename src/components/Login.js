@@ -7,10 +7,6 @@ class Login extends React.Component {
         password: ""
     };
 
-    // userInfo = () => {
-    //     this.state.username.id
-    // }
-
     login = e => {
         e.preventDefault();
 
