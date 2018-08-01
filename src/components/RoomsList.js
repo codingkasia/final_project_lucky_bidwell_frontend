@@ -10,20 +10,12 @@ class RoomsList extends React.Component {
     rooms: [],
     activeRoom: null,
     activeUser: [],
-    initLucky: 13
+    newLucky: 13
   };
-  // fetchPoints = () => {
-  //   fetch(`${API_ROOT}/points`)
-  //     .then(res => res.json())
-  //     .then(points => {
-  //       console.log(`POINTS, ${points.points}`)
-  //       this.setState({ points: points.points })
-  //     });
-  // };
-  generateInitLucky = () => {
-    const num = Math.floor(Math.random() * 27) + 1;
-    console.log(`INIT RANDOM NUMBER, ${num}`);
-    return this.setState({ initLucky: num });
+  generateNewLucky = () => {
+    const lucky = Math.floor(Math.random() * 27) + 1;
+    console.log(`NEW RANDOM Lucky, ${lucky}`);
+    return this.setState({ newLucky: lucky });
   };
 
   // will need to save somehow so both players start with the same lucky
@@ -89,16 +81,10 @@ class RoomsList extends React.Component {
 
   render = () => {
     const { rooms, activeRoom } = this.state;
-    return (
-      <div className="roomsList">
-        <ActionCable
-          channel={{ channel: "RoomsChannel" }}
-          onReceived={this.handleReceivedRoom}
-        />
+    return <div className="roomsList">
+        <ActionCable channel={{ channel: "RoomsChannel" }} onReceived={this.handleReceivedRoom} />
 
-        {this.state.rooms.length ? (
-          <Cable rooms={rooms} handleReceivedGuess={this.handleReceivedGuess} />
-        ) : null}
+        {this.state.rooms.length ? <Cable rooms={rooms} handleReceivedGuess={this.handleReceivedGuess} /> : null}
 
         <h1>GAME ROOMS</h1>
         <p>
@@ -108,15 +94,8 @@ class RoomsList extends React.Component {
         <h2>Enter A Room To Play</h2>
         <ul>{mapRooms(rooms, this.handleClick)}</ul>
         <RoomForm />
-        {activeRoom ? (
-          <Board
-            room={findActiveRoom(rooms, activeRoom)}
-            activeUser={this.state.activeUser}
-            initLucky={this.state.initLucky}
-          />
-        ) : null}
-      </div>
-    );
+      {activeRoom ? <Board room={findActiveRoom(rooms, activeRoom)} activeUser={this.state.activeUser} newLucky={this.state.newLucky} generateNewLucky={this.generateNewLucky} /> : null}
+      </div>;
   };
 }
 

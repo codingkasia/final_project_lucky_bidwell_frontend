@@ -10,8 +10,6 @@ class RoomForm extends React.Component {
     this.setState({ name: e.target.value })
   }
 
-  
-
   handleSubmit = e => {
     e.preventDefault();
     fetch(`${API_ROOT}/rooms`, {
