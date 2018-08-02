@@ -2,16 +2,27 @@ import React from 'react'
 import Square from './Square'
 import { API_ROOT } from "../constants";
 const award = 100;
+const guessesLeft = 20
+const jackpotCut = 0.05
 
 
 class Board extends React.Component {
   state = {
-    points: 100
+    jackpot: 0,
+    guessesLeft: guessesLeft,
+    points: 0
   };
-  
-  // //tem solution => will update based on json from points fetch
+
+  // calculateJackpot =() => {
+  //   userJackpotShare = this.state.points/totalPoints * jackpotSize * (1 - jackpotCut)
+  // }
+  trackUserGuesses = () => {
+    let total = this.state.guessesLeft - 1;
+    this.setState({ guessesLeft: total });
+  };
+
   updateStatePoints = () => {
-    this.setState({ points: this.props.points + award });
+    this.setState({ points: this.state.points + award });
   };
 
   // fetchPoints = () => {
@@ -24,24 +35,34 @@ class Board extends React.Component {
   // };
 
   renderSquare(i) {
-    return <Square newLucky={this.props.newLucky} 
-                    points={this.state.points} 
-                    guesses={this.props.room.guesses} 
-                    value={i} room_id={this.props.room.id} 
-                    user_id={this.props.activeUser} 
-                    newLucky={this.props.newLucky} 
-                    updateStatePoints={this.updateStatePoints} 
-                    generateNewLucky={this.props.generateNewLucky} />;
+    return (
+      <Square
+        newLucky={this.props.newLucky}
+        points={this.state.points}
+        guesses={this.props.room.guesses}
+        value={i}
+        room_id={this.props.room.id}
+        user_id={this.props.activeUser}
+        newLucky={this.props.newLucky}
+        updateStatePoints={this.updateStatePoints}
+        trackUserGuesses={this.trackUserGuesses}
+        generateNewLucky={this.props.generateNewLucky}
+      />
+    );
   }
 
   render() {
     // console.log(`USER is, ${this.props.activeUser}`)
-    return <div>
+    return (
+      <div>
         <wrapper>
           <div className="points">POINTS: {this.state.points}</div>
-          <div className="jackpot">     JACKPOT: 10</div>
-        <div className="bidsLeft"> GUESSES LEFT: 30</div>
-</wrapper>
+          <div className="jackpot"> JACKPOT: {this.state.jackpot}</div>
+          <div className="bidsLeft">
+            {" "}
+            GUESSES LEFT: {this.state.guessesLeft}
+          </div>
+        </wrapper>
 
         <div className="board-row">
           {this.renderSquare(1)}
@@ -103,7 +124,8 @@ class Board extends React.Component {
           {this.renderSquare(49)}
           {this.renderSquare(50)}
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 

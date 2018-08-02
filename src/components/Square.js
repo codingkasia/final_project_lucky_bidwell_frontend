@@ -4,6 +4,7 @@ import { API_ROOT } from '../constants';
 const award = 100
 
 
+
 class Square extends React.Component {
   constructor(props) {
     super(props);
@@ -13,18 +14,13 @@ class Square extends React.Component {
       user_id: this.props.user_id,
       bgColor: null,
       found: false,
-      points: 0,
-      lucky: this.props.newLucky
+      lucky: this.props.newLucky    
     };
     this.evaluateClick = this.evaluateClick.bind(this);
   }
 
   
-
-  updateStatePoints = () => {
-    this.setState({ points: this.state.points + award });
-  };
-
+  
   evaluateClick() {
     let values = [];
     this.props.guesses.map(guess => {
@@ -39,8 +35,10 @@ class Square extends React.Component {
       console.log("does NOT include");
       if (this.props.value === this.props.newLucky) {
         console.log("luckyy!");
-        this.props.generateNewLucky();
+        // this.props.generateNewLucky();
         console.log(`NEW LUCKY IS, ${this.props.newLucky}`);
+        this.setState({found: true})
+        this.props.updateStatePoints()
         return this.setState({ bgColor: "green" });
       } else {
         console.log("no lucky!");
@@ -48,9 +46,11 @@ class Square extends React.Component {
       }
     }
   }
+ 
 
   handleClick = () => {
     // e.preventDefault();
+    this.props.trackUserGuesses()
     this.setState({ value: this.props.value });
     this.evaluateClick();
     this.postGuess();
