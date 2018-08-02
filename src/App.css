@@ -96,20 +96,22 @@ wrapper {
   padding: 25px 2.2em;
   width: 140px;
 }
-.jackpot {
-  margin-right: 20px;
+button.buy {
+  border-radius: 50%;
+ margin-right: 0;
   padding: 20px;
 	background-color: rgb(46, 54, 129);
   overflow: hidden;
   text-align: center;
-  border: 5px solid rgb(46, 54, 129);
+  border-color: rgb(46, 54, 129);
+  border: 5px solid orange;
   color: white;
   font-size: large;
   text-decoration: none;
-	display: inline-block;
-  padding: 25px 2.2em;
-  width: 140px;
-  text-align: center;
+  display: inline-block;
+    padding: 40px 2em;
+
+
 }
 .bidsLeft {
   margin-right: 20px;
@@ -122,10 +124,11 @@ wrapper {
   color: white;
   font-size: large;
   text-decoration: none;
-	display: inline-block;
-  padding-top: 25px ;
+  display: inline-block;
+    padding: 25px 2.2em;
+  /* padding-top: 25px ;
   padding-bottom: 25px;
-  padding-left: 10px;
+  padding-left: 10px; */
   width: 180px;
 }
 

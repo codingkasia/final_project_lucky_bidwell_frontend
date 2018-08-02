@@ -1,21 +1,51 @@
 import React from 'react'
 import Square from './Square'
-import { API_ROOT } from "../constants";
+import { API_ROOT, HEADERS } from "../constants";
 const award = 100;
 const guessesLeft = 20
 const jackpotCut = 0.05
+const jackpotSize = 40
 
 
 class Board extends React.Component {
   state = {
     jackpot: 0,
     guessesLeft: guessesLeft,
-    points: 0
+    points: 1,
+    jackpotShare: 38
   };
 
-  // calculateJackpot =() => {
-  //   userJackpotShare = this.state.points/totalPoints * jackpotSize * (1 - jackpotCut)
+  buyGuesses = () => {
+    this.setState({ guessesLeft: this.state.guessesLeft + 10 });
+
+  }
+  postPointsToDB = () => {
+    const roomID = this.props.room.id;
+    fetch(`${API_ROOT}/scores/${roomID}`, {
+      method: "PATCH",
+      body: JSON.stringify({ sumPoints: award }),
+      headers: HEADERS
+    });
+  };
+
+  // componentWillMount() {
+  //   this.fetchScores()
   // }
+  // fetchScores = () => {
+  //   fetch(`${API_ROOT}/scores`)
+  //     .then(res => res.json())
+  //     .then(result => console.log(`SCORES, ${result}`));
+  // };
+
+  calculateJackpot = () => {
+    // userJackpotShare = this.state.points/totalPoints * jackpotSize * (1 - jackpotCut)
+    const userJackpotShare =
+    ((this.state.points / 100) * jackpotSize * (1 - jackpotCut)) * 100;
+    console.log(`points ${this.state.points}`)
+      //0.01 * 40 * (0.95)
+    return this.setState({ jackpotShare: userJackpotShare });
+  };
+
   trackUserGuesses = () => {
     let total = this.state.guessesLeft - 1;
     this.setState({ guessesLeft: total });
@@ -37,6 +67,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        calculateJackpot={this.calculateJackpot}
         newLucky={this.props.newLucky}
         points={this.state.points}
         guesses={this.props.room.guesses}
@@ -47,22 +78,27 @@ class Board extends React.Component {
         updateStatePoints={this.updateStatePoints}
         trackUserGuesses={this.trackUserGuesses}
         generateNewLucky={this.props.generateNewLucky}
+        postPointsToDB={this.postPointsToDB}
       />
     );
   }
 
   render() {
     // console.log(`USER is, ${this.props.activeUser}`)
-    return (
-      <div>
-        <wrapper>
+    return <div>
+        <div>
           <div className="points">POINTS: {this.state.points}</div>
-          <div className="jackpot"> JACKPOT: {this.state.jackpot}</div>
+          {/* <div className="jackpot">
+            {" "}
+            JACKPOT SHARE: {this.state.jackpotShare}%
+          </div> */}
+         
           <div className="bidsLeft">
             {" "}
             GUESSES LEFT: {this.state.guessesLeft}
           </div>
-        </wrapper>
+        <button className="buy" type="button" onClick={this.buyGuesses}>BUY <br />GUESSES </button>
+        </div>
 
         <div className="board-row">
           {this.renderSquare(1)}
@@ -124,8 +160,7 @@ class Board extends React.Component {
           {this.renderSquare(49)}
           {this.renderSquare(50)}
         </div>
-      </div>
-    );
+      </div>;
   }
 }
 

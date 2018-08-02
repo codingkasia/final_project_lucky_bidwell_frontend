@@ -39,6 +39,8 @@ class Square extends React.Component {
         console.log(`NEW LUCKY IS, ${this.props.newLucky}`);
         this.setState({found: true})
         this.props.updateStatePoints()
+        this.props.postPointsToDB()
+        this.props.calculateJackpot()
         return this.setState({ bgColor: "green" });
       } else {
         console.log("no lucky!");
@@ -53,6 +55,7 @@ class Square extends React.Component {
     this.props.trackUserGuesses()
     this.setState({ value: this.props.value });
     this.evaluateClick();
+   
     this.postGuess();
   };
 
