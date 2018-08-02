@@ -86,12 +86,8 @@ class RoomsList extends React.Component {
 
         {this.state.rooms.length ? <Cable rooms={rooms} handleReceivedGuess={this.handleReceivedGuess} /> : null}
 
-        <h1>GAME ROOMS</h1>
-        <p>
-          In order to play a game you can create your own <br />
-          or enter an existing one if available
-        </p>
-        <h2>Enter A Room To Play</h2>
+        
+      <h2>{this.props.userName}, Enter A Room To Play</h2>
         <ul>{mapRooms(rooms, this.handleClick)}</ul>
         <RoomForm />
       {activeRoom ? <Board room={findActiveRoom(rooms, activeRoom)} activeUser={this.state.activeUser} newLucky={this.state.newLucky} generateNewLucky={this.generateNewLucky} /> : null}

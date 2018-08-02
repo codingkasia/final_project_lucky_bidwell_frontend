@@ -11,7 +11,7 @@ class Board extends React.Component {
   
   // //tem solution => will update based on json from points fetch
   updateStatePoints = () => {
-    this.setState({ points: this.state.points + award });
+    this.setState({ points: this.props.points + award });
   };
 
   // fetchPoints = () => {
@@ -24,7 +24,7 @@ class Board extends React.Component {
   // };
 
   renderSquare(i) {
-    return <Square newLucky={this.state.newLucky} 
+    return <Square newLucky={this.props.newLucky} 
                     points={this.state.points} 
                     guesses={this.props.room.guesses} 
                     value={i} room_id={this.props.room.id} 
@@ -36,9 +36,12 @@ class Board extends React.Component {
 
   render() {
     // console.log(`USER is, ${this.props.activeUser}`)
-    return (
-      <div>
-        <div>POINTS: {this.state.points} </div>
+    return <div>
+        <wrapper>
+          <div className="points">POINTS: {this.state.points}</div>
+          <div className="jackpot">     JACKPOT: 10</div>
+        <div className="bidsLeft"> GUESSES LEFT: 30</div>
+</wrapper>
 
         <div className="board-row">
           {this.renderSquare(1)}
@@ -50,9 +53,9 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
           {this.renderSquare(9)}
+          {this.renderSquare(10)}
         </div>
         <div className="board-row">
-          {this.renderSquare(10)}
           {this.renderSquare(11)}
           {this.renderSquare(12)}
           {this.renderSquare(13)}
@@ -61,10 +64,10 @@ class Board extends React.Component {
           {this.renderSquare(16)}
           {this.renderSquare(17)}
           {this.renderSquare(18)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(19)}
           {this.renderSquare(20)}
+        </div>
+        <div className="board-row">
           {this.renderSquare(21)}
           {this.renderSquare(22)}
           {this.renderSquare(23)}
@@ -72,9 +75,35 @@ class Board extends React.Component {
           {this.renderSquare(25)}
           {this.renderSquare(26)}
           {this.renderSquare(27)}
+          {this.renderSquare(28)}
+          {this.renderSquare(29)}
+          {this.renderSquare(30)}
         </div>
-      </div>
-    );
+        <div className="board-row">
+          {this.renderSquare(31)}
+          {this.renderSquare(32)}
+          {this.renderSquare(33)}
+          {this.renderSquare(34)}
+          {this.renderSquare(35)}
+          {this.renderSquare(36)}
+          {this.renderSquare(37)}
+          {this.renderSquare(38)}
+          {this.renderSquare(39)}
+          {this.renderSquare(40)}
+        </div>
+        <div className="board-row">
+          {this.renderSquare(41)}
+          {this.renderSquare(42)}
+          {this.renderSquare(43)}
+          {this.renderSquare(44)}
+          {this.renderSquare(45)}
+          {this.renderSquare(46)}
+          {this.renderSquare(47)}
+          {this.renderSquare(48)}
+          {this.renderSquare(49)}
+          {this.renderSquare(50)}
+        </div>
+      </div>;
   }
 }
 
