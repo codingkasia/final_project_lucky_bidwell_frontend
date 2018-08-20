@@ -110,7 +110,11 @@ button.buy {
   text-decoration: none;
   display: inline-block;
     padding: 40px 2em;
-
+}
+ 
+.buy:hover {
+  color: #FFF;
+  background: green;
 
 }
 .bidsLeft {

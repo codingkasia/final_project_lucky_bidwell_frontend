@@ -37,6 +37,22 @@ class Board extends React.Component {
   //     .then(result => console.log(`SCORES, ${result}`));
   // };
 
+  // generateLuckyNumber = () => {
+  //     const lucky = Math.floor(Math.random() * 50) + 1;
+  //     console.log(`NEW RANDOM Lucky, ${lucky}`);
+  //     return lucky
+  // }
+
+  // //update lucky number to DB
+  // patchLuckyNumber = () => {
+  //   fetch(`${API_ROOT}/numbers/${roomID}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify({ number: newLuckyNum }),
+  //     headers: HEADERS
+  //   });
+  // }
+
+
   calculateJackpot = () => {
     // userJackpotShare = this.state.points/totalPoints * jackpotSize * (1 - jackpotCut)
     const userJackpotShare =

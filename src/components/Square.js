@@ -19,8 +19,24 @@ class Square extends React.Component {
     this.evaluateClick = this.evaluateClick.bind(this);
   }
 
+  generateLuckyNumber = () => {
+    const lucky = Math.floor(Math.random() * 50) + 1;
+    console.log(`NEW RANDOM Lucky, ${lucky}`);
+    return lucky
+  }
+
   
-  
+
+  fetchNewLucky = () => {
+    fetch(`${API_ROOT}/numbers`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        console.log(myJson);
+      });
+  }
+
   evaluateClick() {
     let values = [];
     this.props.guesses.map(guess => {
@@ -40,6 +56,17 @@ class Square extends React.Component {
         this.setState({found: true})
         this.props.updateStatePoints()
         this.props.postPointsToDB()
+        const newLuckyNum = this.generateLuckyNumber()
+        console.log(`new lucky num is, ${newLuckyNum}`) //WORKS!
+        //update lucky number to DB
+          const roomID = this.state.room_id;
+          fetch(`${API_ROOT}/numbers/${roomID}`, {
+            // fetch(`${API_ROOT}/numbers/${roomID}`, {
+            method: "PATCH",
+            body: JSON.stringify({ number: newLuckyNum, room_id: roomID }),
+            headers: HEADERS
+          });
+        // this.patchLuckyNumber(newLuckyNum)
         this.props.calculateJackpot()
         return this.setState({ bgColor: "green" });
       } else {
@@ -55,8 +82,8 @@ class Square extends React.Component {
     this.props.trackUserGuesses()
     this.setState({ value: this.props.value });
     this.evaluateClick();
-   
     this.postGuess();
+
   };
 
   componentWillReceiveProps = nextProps => {
@@ -73,8 +100,8 @@ class Square extends React.Component {
   };
 
   render() {
-    console.log(`lucky number is ${this.state.lucky}`);
-    console.log(`this props new lucky ${this.props.newLucky}`)
+    // console.log(`lucky number is ${this.state.lucky}`);
+    // console.log(`this props new lucky ${this.props.newLucky}`)
     return (
       <button
         className="square"
