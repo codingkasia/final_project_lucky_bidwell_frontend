@@ -1,12 +1,17 @@
 import React from 'react'
 import RoomsList from './RoomsList'
 
-const baseUrl = 'http://localhost:3001'
-
+// const baseUrl = 'http://localhost:3001'
+const baseUrl =
+  process.env["NODE_ENV"] === "development"
+    ? "http://localhost:3001"
+    : "https://lucky-bidwell-backend.herokuapp.com/";
 class UserPage extends React.Component {
   state = {
       user: null
   };
+
+
 
   componentWillMount () {
     let token = localStorage.getItem('token')
