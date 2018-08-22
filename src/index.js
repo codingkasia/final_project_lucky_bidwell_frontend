@@ -14,6 +14,7 @@ ReactDOM.render(
             <App />
         </ActionCableProvider> 
     </BrowserRouter>,
+ 
     document.getElementById('root')
 );
 registerServiceWorker();

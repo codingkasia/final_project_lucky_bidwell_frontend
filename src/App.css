@@ -1,7 +1,8 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
-  margin-left: 100px;
+  margin-left: 40px;
+  margin-right: 40px
 }
 
 ol, ul {
@@ -29,16 +30,16 @@ ol, ul {
   
 }
 .square {
-  background: #fff;
+  /* background: #fff; */
   border: 3px solid rgb(46, 54, 129);
   float: left;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 40px;
+  height: 71px;
   padding: 0;
   text-align: center;
-  width: 40px;
+  width: 71px;
 }
 
 .square:focus {
@@ -50,7 +51,7 @@ ol, ul {
 }
 
 .board-grid {
-  padding-top: 100px;
+  padding-top: 120px;
 }
 
 .game {
@@ -62,125 +63,109 @@ ol, ul {
   margin-left: 20px;
 }
 
-/* Login Form */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:400,300,600);
-
-*{box-sizing:border-box;}
-
-body {
-  font-family: 'open sans', helvetica, arial, sans;
-background:url(https://unsplash.com/photos/rKPiuXLq29A) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.newRoomForm {
+  padding-bottom: 40px;
 }
 
-@grey:#2a2a2a;
-@blue:#1fb5bf;
-.log-form {
-  width: 40%;
-  min-width: 320px;
-  max-width: 475px;
-  background: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
--moz-transform: translate(-50%,-50%);
--o-transform: translate(-50%,-50%);
--ms-transform: translate(-50%,-50%);
-transform: translate(-50%,-50%);
-  
-  box-shadow: 0px 2px 5px rgba(0,0,0,.25);
-  
-  @media(max-width: 40em){
-    width: 95%;
-    position: relative;
-    margin: 2.5% auto 0 auto;
-    left: 0%;
-  -webkit-transform: translate(0%,0%);
--moz-transform: translate(0%,0%);
--o-transform: translate(0%,0%);
--ms-transform: translate(0%,0%);
-transform: translate(0%,0%);
-  }
-  
-  form {
-    display: block;
-    width: 100%;
-    padding: 2em;
-  }
-  
-  h2 {
-    width: 100%;
-    color: lighten(@grey, 20%);
-    font-family: 'open sans condensed';
-    font-size: 1.35em;
-    display: block;
-    background:@grey;
-    width: 100%;
-    text-transform: uppercase;
-    padding: .75em 1em .75em 1.5em;
-    box-shadow:inset 0px 1px 1px fadeout(white, 95%);
-    border: 1px solid darken(@grey, 5%);
-    //text-shadow: 0px 1px 1px darken(@grey, 5%);
-    margin: 0;
-    font-weight: 200;
-  }
-  
-  input {
-    display: block;
-    margin: auto auto;
-    width: 100%;
-    margin-bottom: 2em;
-    padding: .5em 0;
-    border: none;
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 1.25em;
-    color: #757575;
-    &:focus {
-      outline: none;
-    }
-  }
-  
-  .btn {
+nav {
+	background-color: green;
+	overflow: hidden;
+  padding: 1em;
+  border-color: orange;
+  border: 1px solid rgb(46, 54, 129);
+  color: white;
+}
+
+
+		
+wrapper {
+  padding-bottom: 20px;
+}
+.points {
+  margin-right: 20px;
+  border: 5px solid green;
+	background-color: green;
+	overflow: hidden;
+  /* padding: 3em; */
+  /* border-color: yellow; */
+  /* border: 2px solid rgb(46, 54, 129); */
+  color: white;
+  font-size: large;
+ 	text-decoration: none;
+	display: inline-block;
+  padding: 25px 2.2em;
+  width: 140px;
+}
+button.buy {
+  border-radius: 50%;
+ margin-right: 0;
+  padding: 20px;
+	background-color: rgb(46, 54, 129);
+  overflow: hidden;
+  text-align: center;
+  border-color: rgb(46, 54, 129);
+  border: 5px solid orange;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  display: inline-block;
+    padding: 40px 2em;
+}
+ 
+.buy:hover {
+  color: #FFF;
+  background: green;
+
+}
+.bidsLeft {
+  margin-right: 20px;
+  padding: 20px;
+	background-color: orange;
+  overflow: hidden;
+  text-align: center;
+  border-color: orange;
+  border: 5px solid orange;
+  color: white;
+  font-size: large;
+  text-decoration: none;
+  display: inline-block;
+    padding: 25px 2.2em;
+  /* padding-top: 25px ;
+  padding-bottom: 25px;
+  padding-left: 10px; */
+  width: 180px;
+}
+
+/* ROOM FORM */
+input[type=text], select {
+    width: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
     display: inline-block;
-    background: @blue;
-    border: 1px solid darken(@blue, 5%);
-    padding: .5em 2em;
+    border: 2px solid rgb(46, 54, 129);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 5px;
+} 
+
+input[type=submit] {
+    width: auto;
+    background-color: green;
     color: white;
-    margin-right: .5em;
-    box-shadow: inset 0px 1px 0px fadeout(white, 80%); 
-    &:hover {
-      background: lighten(@blue, 5%);
-    }
-    &:active {
-      background: @blue; 
-      box-shadow: inset 0px 1px 1px fadeout(black, 90%); 
-    }
-    &:focus {
-      outline: none;
-    }
-  }
-  
-  .forgot {
-    color: lighten(@blue, 10%);
-    line-height: .5em;
-    position: relative;
-    top: 2.5em;
-    text-decoration: none;
-    font-size: .75em;
-    margin:0;
-    padding: 0;
-    float: right;
-    
-    &:hover {
-      color:darken(@blue, 5%);
-    }
-    &:active{ 
-    }
-  }
-  
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
 }
 
+input[type=submit]:hover {
+    background-color: orange;
+}
+
+/* div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}   */

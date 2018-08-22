@@ -1,6 +1,7 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
 
+
 class RoomForm extends React.Component {
   state = {
     name: ""
@@ -9,8 +10,6 @@ class RoomForm extends React.Component {
   handleChange = e => {
     this.setState({ name: e.target.value })
   }
-
-  
 
   handleSubmit = e => {
     e.preventDefault();
@@ -25,21 +24,15 @@ class RoomForm extends React.Component {
 
   render = () => {
     return <div className="newRoomForm">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <h2>Create A New Room:</h2>
-          </label>
-          <br />
-
-          <label>
-            Name:
-            
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="CREATE" />
-        </form>
-      </div>;
-  };
+     
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <input type="text" name="name" placeholder="ROOM NAME" value={this.state.name} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="CREATE NEW ROOM" />
+          </form>
+        </div>
+  }
 }
 
 export default RoomForm;
