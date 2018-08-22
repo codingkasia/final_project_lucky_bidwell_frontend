@@ -2,6 +2,7 @@
   "name": "lucky_bidwell-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://quantum-dog.herokuapp.com/",
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "react": "^16.4.1",
