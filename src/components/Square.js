@@ -3,8 +3,6 @@ import { HEADERS } from '../constants';
 import { API_ROOT } from '../constants';
 const award = 100
 
-
-
 class Square extends React.Component {
   constructor(props) {
     super(props);
